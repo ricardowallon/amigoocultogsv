@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desvende o Amigo Oculto Mais Épico!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos Globais e Reset */
+        body {
+    font-family: 'Open Sans', sans-serif;
+    /* NOVO FUNDO PRETO SÓLIDO */
+    background-color: #000000; 
+    color: #ffffff; /* Mudamos a cor padrão do texto para branco */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 25px; /* Bordas mais arredondadas */
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* Para transições de slide */
+        }
+
+        h1 {
+            font-family: 'Bangers', cursive; /* Fonte divertida */
+            color: #d63384; /* Rosa choque */
+            margin-bottom: 15px;
+            font-size: 3.5em; /* Maior e mais impactante */
+            text-shadow: 3px 3px #ffe066; /* Sombra para pop-out */
+            line-height: 1;
+        }
+
+        h2 {
+            font-family: 'Bangers', cursive;
+            color: #007bff; /* Azul vibrante */
+            margin-bottom: 30px;
+            font-size: 2em;
+            text-shadow: 2px 2px #cce5ff;
+        }
+
+        /* Conteúdo dos Passos */
+        .step-wrapper {
+            position: relative;
+            width: 100%;
+            overflow: hidden;
+            min-height: 350px; /* Garante espaço para o conteúdo e GIFs */
+            display: flex; /* Para centralizar conteúdo verticalmente */
+            align-items: center;
+        }
+
+        .step {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out; /* Animação de transição */
+            transform: translateX(100%); /* Começa fora da tela à direita */
+        }
+
+        .step.active {
+            opacity: 1;
+            transform: translateX(0); /* Entra na tela */
+            position: relative; /* Para ocupar espaço no fluxo */
+        }
+
+        .step.leaving {
+            transform: translateX(-100%); /* Sai pela esquerda */
+            opacity: 0;
+        }
+
+        .step-content {
+            background-color: #f8f9fa;
+            border: 2px dashed #ffc107; /* Borda tracejada divertida */
+            padding: 30px;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+            animation: bounceIn 0.8s ease-out; /* Animação para o conteúdo */
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.05); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+
+        .step-content h3 {
+            font-family: 'Bangers', cursive;
+            color: #28a745; /* Verde de sucesso */
+            font-size: 2em;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+
+        .step-content p {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2em;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .step-content img {
+            max-width: 90%;
+            height: auto;
+            border-radius: 10px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Botões de Navegação */
+        .navigation {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Espaço entre os botões */
+        }
+
+        .navigation button {
+            background-color: #ff851b; /* Laranja vibrante */
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 30px; /* Botões pílula */
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            font-weight: bold;
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+        }
+
+        .navigation button:hover:not(:disabled) {
+            background-color: #e66a00;
+            transform: translateY(-3px); /* Efeito de elevação */
+        }
+
+        .navigation button:active:not(:disabled) {
+            transform: translateY(0);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navigation button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        /* Estilo para a revelação final */
+        #step4 .reveal-name {
+            font-family: 'Bangers', cursive;
+            font-size: 4em; /* Enorme! */
+            color: #dc3545; /* Vermelho perigoso */
+            font-weight: bold;
+            margin-top: 25px;
+            text-shadow: 4px 4px #ffda82;
+            animation: pulse 1.5s infinite; /* Animação de pulsação */
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.5em; }
+            .container { padding: 25px; }
+            .step-content { padding: 20px; }
+            .step-content h3 { font-size: 1.5em; }
+            .step-content p { font-size: 1em; }
+            .navigation button { padding: 10px 20px; font-size: 16px; }
+            #step4 .reveal-name { font-size: 2.5em; }
+        }
+
+        @media (max-width: 480px) {
+            .navigation { flex-direction: column; gap: 10px; }
+            .navigation button { width: 90%; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1><span role="img" aria-label="presente">🎁</span> Desvende o Mistério do Amigo Oculto! <span role="img" aria-label="detetive">🕵️‍♀️</span></h1>
+    <h2>Prepare-se para Rir e Pensar!</h2>
+
+    <div class="step-wrapper">
+        <div class="step active" id="step1">
+            <div class="step-content">
+                <h3>Olá, Gestão V (a melhor gestão V que tem kkkk)!</h3>
+                <p>
+                    Sua missão, é desvendar o nome do meu Amigo Oculto! Cada pista te levará mais perto da verdade.
+                    Está pronto(a) para se sentir os própios integrantes do scooby-doo ? Use o botão abaixo!
+                </p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNjIzNjBkbzRhM3FnM2Vmb3Nidm10NTlzZnR2eWRyN3gwazZwd2VrYyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/wfOe7SdZ3XyHm/giphy.gif" alt="Detetive Investigando">
+            </div>
+        </div>
+
+        <div class="step" id="step2">
+            <div class="step-content">
+                <h3>Pista Quentíssima! 🔥</h3>
+                <p>
+                    SEI QUE ESTÃO RINDO - VAMOS PARA A DICA 1!
+                    <br><br>
+                    Qual é o superpoder secreto do meu amigo oculto? Ele(a) é mestre em:
+                    <br>
+                    A) Tratar pontos e ofícios mais rapido que o THE FLASH? (uma máááquina)
+                    <br>
+                    B) Fazer comemorações e enganjar o time? (tuts tuts tuts)
+                    <br><br>
+                    C) Ser resolutiva, agir rápido e ajudar em tudo? (e é uma prefeita é?) 
+                    <br><br>
+                    *Se você pensou B), está quentíssimo(a)! HAHAHA*
+                </p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExN2U1MGl6NndmN3dhZTQ5d2k3Nmdna2IxOWR4cnJzMGhjZzdoeHc2cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/pUeXcg80cO8I8/giphy.gif" alt="Gato rindo e apontando">
+            </div>
+        </div>
+
+        <div class="step" id="step3">
+            <div class="step-content">
+                <h3>A Tensão Aumenta! 🤯</h3>
+                <p>
+                    SERÁ QUE VOCÊS ESTÃO NO RUMO?  - DICA 2 E REVELADORA!
+                    <br><br>
+                    Quando o assunto é o trabalho, ele(a)?
+                    <br>
+                    A) É o Zé Rotinha? (so vive em rota kkkk)
+                    <br>
+                    B) É Adm? só fica na sede? (O terror da periculosidade)
+                    <br>
+                    C) É CLT Premium? Sai mais cedo que nós? (vida boa? ou será que não)
+                    <br><br>
+                    *Não vou dizer a certa, quem vocês acham que é?!*
+                </p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMThyYWNzNTh2dWV4MnIzZ2M3ZWJkOWN0OGxuOTdzaHFzanF1NmdsayZlcD12MV9naWZzX3NlYXJjaCZjdD1n/2X3nwKVxriOyQwJanY/giphy.gif" alt="Pessoa dançando e vibrando">
+            </div>
+        </div>
+
+        <div class="step" id="step4">
+            <div class="step-content">
+                <h3>E O VENCEDOR É... <span role="img" aria-label="trofeu">🏆</span></h3>
+                <p>
+                    Parabéns, detetive! Você desvendou o mistério com maestria e humor!
+                    <br>
+                    O meu Amigo Oculto é ninguém menos que:
+                </p>
+                <div class="reveal-name">
+                    VIVIANE ANDRADE!!
+                </div>
+                <p style="margin-top: 25px;">
+                    🎉 Prepare um presente tão incrível quanto você Viviane! 🎉
+                    <br>
+                    </p>
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXY5cm50MXBldzNhcXQ5enRyeHB4cGo2NWMzZnRvdTcxcXF5aGdmMyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/kKo2x2QSWMNfW/giphy.gif" alt="Confete caindo, celebração">
+            </div>
+        </div>
+    </div>
+
+    <div class="navigation">
+        <button id="prevBtn" onclick="changeStep(-1)" disabled>PISTA ANTERIOR</button>
+        <button id="nextBtn" onclick="changeStep(1)">PRÓXIMA PISTA</button>
+    </div>
+
+</div>
+
+<script>
+    let currentStep = 0; // Começa no índice 0
+    const steps = document.querySelectorAll('.step');
+    const totalSteps = steps.length;
+
+    function showStep(stepIndex, direction = 0) { // direction: -1 (prev), 1 (next), 0 (init)
+        steps.forEach((step, index) => {
+            if (index === stepIndex) {
+                step.classList.remove('leaving');
+                step.classList.add('active');
+                if (direction === 1) { // Entrando pela direita (próximo)
+                     step.style.transform = 'translateX(100%)';
+                     setTimeout(() => step.style.transform = 'translateX(0)', 10);
+                } else if (direction === -1) { // Entrando pela esquerda (anterior)
+                    step.style.transform = 'translateX(-100%)';
+                    setTimeout(() => step.style.transform = 'translateX(0)', 10);
+                } else { // Inicial
+                    step.style.transform = 'translateX(0)';
+                }
+            } else {
+                if (step.classList.contains('active')) { // Se estava ativo e vai sair
+                    step.classList.remove('active');
+                    if (direction === 1) { // Saindo pela esquerda (próximo)
+                        step.style.transform = 'translateX(-100%)';
+                        step.classList.add('leaving');
+                    } else if (direction === -1) { // Saindo pela direita (anterior)
+                        step.style.transform = 'translateX(100%)';
+                        step.classList.add('leaving');
+                    } else {
+                        step.style.transform = 'translateX(0)';
+                        step.classList.remove('leaving');
+                    }
+                } else { // Outros passos não ativos
+                    step.style.display = 'none'; // Esconde para não atrapalhar o layout durante a transição
+                }
+            }
+        });
+        
+        // Garante que apenas o passo ativo tenha display: flex
+        setTimeout(() => {
+            steps.forEach((step, index) => {
+                if (index === stepIndex) {
+                    step.style.display = 'flex';
+                } else {
+                    step.style.display = 'none';
+                }
+            });
+        }, 500); // Ajuste o tempo para a duração da transição CSS
+
+        // Atualiza o estado dos botões
+        document.getElementById('prevBtn').disabled = (stepIndex === 0);
+        
+        const nextBtn = document.getElementById('nextBtn');
+        if (stepIndex === totalSteps - 1) {
+            nextBtn.textContent = 'FIM!';
+            nextBtn.style.backgroundColor = '#6c757d'; // Cinza para o botão final
+            nextBtn.disabled = true;
+        } else if (stepIndex === totalSteps - 2) { // Penúltimo passo
+            nextBtn.textContent = 'REVELAR NOME';
+            nextBtn.style.backgroundColor = '#dc3545'; // Vermelho para a revelação
+            nextBtn.disabled = false;
+        } else {
+            nextBtn.textContent = 'PRÓXIMA PISTA';
+            nextBtn.style.backgroundColor = '#ff851b';
+            nextBtn.disabled = false;
+        }
+    }
+
+    function changeStep(change) {
+        const prevStep = currentStep;
+        currentStep += change;
+        
+        if (currentStep < 0) {
+            currentStep = 0;
+        } else if (currentStep >= totalSteps) { // Permite ir até o "FIM!"
+            currentStep = totalSteps - 1;
+        }
+        
+        showStep(currentStep, change);
+    }
+
+    // Inicializa o site no primeiro passo (0)
+    document.addEventListener('DOMContentLoaded', () => {
+        showStep(currentStep);
+    });
+
+</script>
+
+</body>
+</html>
